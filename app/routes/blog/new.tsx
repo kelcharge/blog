@@ -1,27 +1,8 @@
 import type { ActionArgs } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-
-import { db } from "~/utils/db.server";
+import { createPost } from "~/services/ActionService";
 
 export const action = async ({ request }: ActionArgs) => {
-  const form = await request.formData();
-  const author = form.get("author");
-  const title = form.get("title");
-  const body = form.get("body");
-  // we do this type check to be extra sure and to make TypeScript happy
-  // we'll explore validation next!
-  if (
-    typeof author !== "string" ||
-    typeof title !== "string" ||
-    typeof body !== "string"
-  ) {
-    throw new Error(`Form not submitted correctly.`);
-  }
-
-  const fields = { author, title, body };
-
-  const post = await db.blogPost.create({ data: fields });
-  return redirect(`/blog/${post.id}`);
+  return createPost(request);
 };
 
 export default function NewPostRoute() {
