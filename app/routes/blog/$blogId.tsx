@@ -13,7 +13,17 @@ import PostBody from "~/components/PostBody";
 import { db } from "~/utils/db.server";
 
 export const action = async ({ request }: ActionArgs) => {
-  return deletePost(request);
+  const form = await request.formData();
+  const actionType = form.get("action");
+  const id = form.get("id")?.toString();
+
+  if (actionType === "edit") {
+    return redirect(`/blog/edit/${id}`);
+  }
+
+  if (actionType === "delete" && typeof id !== "undefined") {
+    return deletePost(id);
+  }
 };
 
 export const loader = async ({ params }: LoaderArgs) => {

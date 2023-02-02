@@ -529,6 +529,10 @@ video {
   top: 0.25rem;
 }
 
+.left-4 {
+  left: 1rem;
+}
+
 .right-4 {
   right: 1rem;
 }
@@ -728,6 +732,10 @@ textarea {
 
 label {
   width: 50px;
+}
+
+li > a {
+  width: 100%;
 }
 
 .hover\:cursor-pointer:hover {

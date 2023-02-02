@@ -16,3 +16,7 @@ textarea {
 label {
     width: 50px;
 }
+
+li > a {
+    width: 100%;
+}
