@@ -9,7 +9,6 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import { useState, useEffect } from "react";
 import { authenticator } from "./utils/auth.server";
 import ButtonAppBar from "./components/ButtonAppBar";
 
@@ -40,7 +39,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <ButtonAppBar isAuthenticated={user} />
+        <ButtonAppBar user={user} />
         <Outlet context={user} />
         <ScrollRestoration />
         <Scripts />

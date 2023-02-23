@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const ButtonAppBar = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
+const ButtonAppBar = ({ user }: { user: Record<string, any> }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -38,16 +38,17 @@ const ButtonAppBar = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
               Blogs
             </Typography>
           </Box>
+          {user && (
+            <Typography variant="h6" sx={{ pr: 2 }}>
+              Hello {user.name.givenName}!
+            </Typography>
+          )}
           <Typography
             variant="h6"
             component={Remix.Link}
-            to={
-              isAuthenticated
-                ? `/auth/logout`
-                : `/auth/${SocialsProvider.GOOGLE}`
-            }
+            to={user ? `/auth/logout` : `/auth/${SocialsProvider.GOOGLE}`}
           >
-            {isAuthenticated ? "Logout" : "Login"}
+            {user ? "Logout" : "Login"}
           </Typography>
         </Toolbar>
       </AppBar>
