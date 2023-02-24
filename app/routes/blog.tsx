@@ -1,6 +1,9 @@
+import { BlogPost } from "@prisma/client";
 import { json, ActionArgs, redirect } from "@remix-run/node";
 import { useLoaderData, Outlet, Link, useMatches } from "@remix-run/react";
+import useRouteId from "~/hooks/useRouteId";
 import PostBody from "~/components/PostBody";
+import PostList from "~/components/PostList";
 import { useUser } from "~/root";
 import { deletePost } from "~/services/ActionService";
 
@@ -33,8 +36,7 @@ export const loader = async () => {
 
 const Blog = () => {
   const data = useLoaderData<typeof loader>();
-  const matches = useMatches();
-  const route = matches[matches.length - 1];
+  const route = useRouteId();
   const latestPost = data.posts.filter(
     (post) => post.id === Math.max(...data.posts.map((post) => post.id))
   )[0];
@@ -45,11 +47,7 @@ const Blog = () => {
       <div className="flex flex-row justify-center w-full">
         <div className="px-6 pt-10">
           <ul>
-            {data.posts.map((post) => (
-              <li className="flex hover:underline" key={post.id}>
-                <Link to={`${post.id}`}>{post.title}</Link>
-              </li>
-            ))}
+            <PostList posts={data.posts} />
             {user && (
               <li className="bg-sky-700 rounded w-20 h-10 flex items-center text-center mt-4 hover:bg-sky-500">
                 <Link to="/blog/new">New Post</Link>
@@ -59,7 +57,7 @@ const Blog = () => {
         </div>
         <div className="min-w-[1024px] max-w-screen-lg">
           <h1 className="text-3xl pb-2 text-center">Posts</h1>
-          {route.id === "routes/blog" && latestPost && (
+          {route === "routes/blog" && latestPost && (
             <PostBody post={latestPost} />
           )}
           <Outlet context={user} />
@@ -67,6 +65,11 @@ const Blog = () => {
       </div>
     </main>
   );
+};
+
+export const ErrorBoundary = ({ error }: { error: any }) => {
+  console.log(error);
+  return <h1>Oops! Something went wrong!</h1>;
 };
 
 export default Blog;
