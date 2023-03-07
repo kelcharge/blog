@@ -1,7 +1,9 @@
 import { db } from "~/utils/db.server";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "react-router";
-import PostList from "~/components/PostList";
+import { Outlet, useLoaderData } from "@remix-run/react";
+import PostBody from "~/components/PostBody";
+import Container from "~/components/Container";
+import PostMenu from "~/components/PostMenu";
 
 export const loader = async () => {
   return json({
@@ -16,19 +18,14 @@ export const loader = async () => {
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
+  const latestPost = data.posts.filter(
+    (post) => post.id === Math.max(...data.posts.map((post) => post.id))
+  )[0];
 
   return (
-    <div className="h-screen text-white bg-slate-700 flex">
-      <div className="flex flex-row justify-center">
-        <div className="px-6 pt-10">
-          <ul>
-            <PostList posts={data.posts} />
-          </ul>
-        </div>
-      </div>
-      <div className="flex grow justify-center">
-        <h2 className="font-extrabold text-5xl">Welcome!</h2>
-      </div>
-    </div>
+    <Container title="Welcome">
+      <PostMenu data={data} />
+      {latestPost && <PostBody post={latestPost} />}
+    </Container>
   );
 }

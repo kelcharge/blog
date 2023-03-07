@@ -30,7 +30,7 @@ export default function EditPostRoute() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="p-6 flex flex-col gap-4 items-center">
+    <div className="min-w-[1024px] max-w-screen-lg p-6 flex flex-col gap-4 items-center">
       <h3 className="text-2xl">Edit post</h3>
       <form method="post" className="flex flex-col gap-4 items-center">
         <input type="hidden" name="id" value={data.post.id} />
