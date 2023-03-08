@@ -1,8 +1,9 @@
 import { useUser } from "~/root";
+import { useState } from "react";
 
 const PostBody = ({ post }: any) => {
   const user = useUser();
-  const date = new Date(post.createdAt);
+  const [date, setDate] = useState<Date>(new Date(post.createdAt));
 
   return (
     <div className="lg:min-w-[1024px] max-w-screen-lg">
