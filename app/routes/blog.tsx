@@ -14,6 +14,7 @@ import { getPostDateTime } from "~/services/TimeService";
 /*** Utils ***/
 import { db } from "~/utils/db.server";
 import { useUser } from "~/root";
+import { Typography } from "@mui/material";
 
 export const action = async ({ request }: ActionArgs) => {
   const form = await request.formData();
@@ -63,8 +64,13 @@ const Blog = () => {
 };
 
 export const ErrorBoundary = ({ error }: { error: any }) => {
-  console.log(error);
-  return <h1>Oops! Something went wrong!</h1>;
+  return (
+    <Container title="Oops!">
+      <Typography variant="caption">
+        Something went wrong. Please try again later.
+      </Typography>
+    </Container>
+  );
 };
 
 export default Blog;

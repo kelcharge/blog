@@ -1,6 +1,7 @@
 /*** System ***/
 import { LoaderArgs, redirect, ActionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
+import { TypedResponse } from "@remix-run/node";
 
 /*** Hooks ***/
 import { useLoaderData } from "@remix-run/react";
@@ -14,6 +15,7 @@ import PostBody from "~/components/PostBody";
 
 /*** Utils ***/
 import { db } from "~/utils/db.server";
+import { BlogPost } from "@prisma/client";
 
 export const action = async ({ request }: ActionArgs) => {
   const form = await request.formData();
@@ -29,7 +31,11 @@ export const action = async ({ request }: ActionArgs) => {
   }
 };
 
-export const loader = async ({ params }: LoaderArgs) => {
+export const loader = async ({
+  params,
+}: LoaderArgs): Promise<
+  TypedResponse<{ post: BlogPost; date: string; time: string }>
+> => {
   const post = await db.blogPost.findUnique({
     where: { id: Number(params.blogId) },
   });
