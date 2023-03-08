@@ -7,6 +7,7 @@ import { useLoaderData } from "@remix-run/react";
 
 /*** Services ***/
 import { deletePost } from "~/services/ActionService";
+import { getPostDateTime } from "~/services/TimeService";
 
 /*** Components ***/
 import PostBody from "~/components/PostBody";
@@ -35,11 +36,13 @@ export const loader = async ({ params }: LoaderArgs) => {
   if (!post) {
     return redirect("/blog");
   }
-  return json({ post });
+
+  const { date, time } = getPostDateTime(post);
+  return json({ post, date, time });
 };
 
 export default function BlogRoute() {
   const data = useLoaderData<typeof loader>();
 
-  return <PostBody post={data.post} />;
+  return <PostBody post={data.post} date={data.date} time={data.time} />;
 }

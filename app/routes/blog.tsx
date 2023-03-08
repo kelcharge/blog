@@ -9,6 +9,7 @@ import Container from "~/components/Container";
 
 /*** Services ***/
 import { deletePost } from "~/services/ActionService";
+import { getPostDateTime } from "~/services/TimeService";
 
 /*** Utils ***/
 import { db } from "~/utils/db.server";
@@ -29,29 +30,32 @@ export const action = async ({ request }: ActionArgs) => {
 };
 
 export const loader = async () => {
-  return json({
-    posts: await db.blogPost.findMany({
-      take: 10,
-      orderBy: {
-        createdAt: "desc",
-      },
-    }),
+  const posts = await db.blogPost.findMany({
+    take: 10,
+    orderBy: {
+      createdAt: "desc",
+    },
   });
+
+  const latestPost = posts.filter(
+    (post) => post.id === Math.max(...posts.map((post) => post.id))
+  )[0];
+
+  const { date, time } = getPostDateTime(latestPost);
+
+  return json({ posts, latestPost, date, time });
 };
 
 const Blog = () => {
   const data = useLoaderData<typeof loader>();
-  const latestPost = data.posts.filter(
-    (post) => post.id === Math.max(...data.posts.map((post) => post.id))
-  )[0];
   const user = useUser();
   const location = useLocation();
 
   return (
     <Container title="Most Recent Posts">
       <PostMenu data={data} />
-      {location.pathname === "/blog" && latestPost && (
-        <PostBody post={latestPost} />
+      {location.pathname === "/blog" && data.latestPost && (
+        <PostBody post={data.latestPost} date={data.date} time={data.time} />
       )}
       <Outlet context={user} />
     </Container>

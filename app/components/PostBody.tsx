@@ -1,9 +1,7 @@
 import { useUser } from "~/root";
-import { useState } from "react";
 
-const PostBody = ({ post }: any) => {
+const PostBody = ({ post, date, time }: any) => {
   const user = useUser();
-  const [date, setDate] = useState<Date>(new Date(post.createdAt));
 
   return (
     <div className="lg:min-w-[1024px] max-w-screen-lg">
@@ -28,8 +26,7 @@ const PostBody = ({ post }: any) => {
         )}
         <h2 className="text-2xl">{post.title}</h2>
         <span className="text-sm">
-          By {post.author} | {date.toLocaleDateString()}{" "}
-          {date.toLocaleTimeString()}
+          By {post.author} | {date} {time}
         </span>
         <p className="pt-4 px-4 pb-8 lg:w-5/6">{post.body}</p>
       </div>
