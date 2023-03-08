@@ -1,7 +1,9 @@
 import { useUser } from "~/root";
+import { marked } from "marked";
 
 const PostBody = ({ post, date, time }: any) => {
   const user = useUser();
+  const markdown = marked.parse(post.body);
 
   return (
     <div className="lg:min-w-[1024px] max-w-screen-lg">
@@ -28,7 +30,11 @@ const PostBody = ({ post, date, time }: any) => {
         <span className="text-sm">
           By {post.author} | {date} {time}
         </span>
-        <p className="pt-4 px-4 pb-8 lg:w-5/6">{post.body}</p>
+
+        <div
+          className="pt-4 px-4 pb-8 lg:w-5/6"
+          dangerouslySetInnerHTML={{ __html: markdown }}
+        />
       </div>
     </div>
   );
