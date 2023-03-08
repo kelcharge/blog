@@ -2,10 +2,10 @@ import { useUser } from "~/root";
 
 const PostBody = ({ post }: any) => {
   const user = useUser();
+  const date = new Date(post.createdAt);
 
   return (
-    <div className="min-w-[1024px] max-w-screen-lg">
-      <h1 className="text-3xl pb-2 text-center">Posts</h1>
+    <div className="lg:min-w-[1024px] max-w-screen-lg">
       <div className="pt-2 flex flex-col items-center bg-zinc-300 text-black font-semibold shadow-md relative">
         {user && (
           <>
@@ -26,8 +26,11 @@ const PostBody = ({ post }: any) => {
           </>
         )}
         <h2 className="text-2xl">{post.title}</h2>
-        <span>Author: {post.author}</span>
-        <p className="p-4 w-3/4">{post.body}</p>
+        <span className="text-sm">
+          By {post.author} | {date.toLocaleDateString()}{" "}
+          {date.toLocaleTimeString()}
+        </span>
+        <p className="pt-4 px-4 pb-8 lg:w-5/6">{post.body}</p>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const ButtonAppBar = ({ user }: { user: Record<string, any> }) => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar sx={{ bgcolor: "#334155" }}>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -24,7 +24,7 @@ const ButtonAppBar = ({ user }: { user: Record<string, any> }) => {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Box sx={{ flexGrow: 1 }}>
             <Typography
               variant="h6"
