@@ -1,7 +1,16 @@
 import { useUser } from "~/root";
 import { marked } from "marked";
+import Post from "~/types/BlogPost";
 
-const PostBody = ({ post, date, time }: any) => {
+const PostBody = ({
+  post,
+  date,
+  time,
+}: {
+  post: Post;
+  date: string;
+  time: string;
+}) => {
   const user = useUser();
   const markdown = marked.parse(post.body);
 

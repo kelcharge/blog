@@ -1,4 +1,4 @@
-import { BlogPost } from "@prisma/client";
+import BlogPost from "../types/BlogPost";
 
 export const getPostDateTime = (post: BlogPost) => {
     const date = new Date(post.createdAt).toLocaleDateString();

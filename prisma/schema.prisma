@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -16,5 +16,5 @@ model BlogPost {
   lastModified DateTime @updatedAt
   author       String   @default("KEL")
   title        String
-  body         String   @db.LongText
+  body         String
 }

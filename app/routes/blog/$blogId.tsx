@@ -15,7 +15,9 @@ import PostBody from "~/components/PostBody";
 
 /*** Utils ***/
 import { db } from "~/utils/db.server";
-import { BlogPost } from "@prisma/client";
+
+/*** Types ***/
+import Post from "~/types/BlogPost";
 
 export const action = async ({ request }: ActionArgs) => {
   const form = await request.formData();
@@ -34,11 +36,12 @@ export const action = async ({ request }: ActionArgs) => {
 export const loader = async ({
   params,
 }: LoaderArgs): Promise<
-  TypedResponse<{ post: BlogPost; date: string; time: string }>
+  TypedResponse<{ post: Post; date: string; time: string }>
 > => {
   const post = await db.blogPost.findUnique({
     where: { id: Number(params.blogId) },
   });
+
   if (!post) {
     return redirect("/blog");
   }
@@ -48,7 +51,7 @@ export const loader = async ({
 };
 
 export default function BlogRoute() {
-  const data = useLoaderData<typeof loader>();
+  const { post, date, time } = useLoaderData<typeof loader>();
 
-  return <PostBody post={data.post} date={data.date} time={data.time} />;
+  return <PostBody post={post} date={date} time={time} />;
 }
