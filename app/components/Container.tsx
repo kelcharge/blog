@@ -1,14 +1,12 @@
-import { Typography, Divider } from "@mui/material";
+import { Divider } from "@mui/material";
 
-const Container = ({ children, title }: any) => {
+// Colors are tailwind so they must have a weight
+const Container = ({ children, bgColor, textColor }: any) => {
   return (
-    <main className="h-screen text-white bg-slate-700 flex flex-col items-center gap-8">
-      <h2 className="text-5xl pt-2 lg:pt-0 lg:text-7xl">{title}</h2>
-      <Divider
-        component="div"
-        role="presentation"
-        sx={{ borderColor: "white", width: "100%" }}
-      />
+    <main
+      className={`h-screen text-${textColor} bg-${bgColor} flex flex-col items-center gap-8`}
+    >
+      <Divider component="div" role="presentation" />
       <div className="flex lg:flex-row flex-col justify-center w-full">
         {children}
       </div>

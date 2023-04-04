@@ -1,0 +1,10 @@
+body {
+    font-family: monospace;
+    font-weight: bold;
+}
+
+ul::before {
+    content: "•";
+    position: absolute;
+    margin-left: -1em;
+}

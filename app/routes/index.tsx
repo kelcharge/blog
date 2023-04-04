@@ -26,11 +26,9 @@ export default function Index() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <Container title="Welcome">
+    <Container>
       <PostMenu data={data} />
-      {data.latestPost && (
-        <PostBody post={data.latestPost} date={data.date} time={data.time} />
-      )}
+      {data.latestPost && <PostBody post={data.latestPost} date={data.date} />}
     </Container>
   );
 }

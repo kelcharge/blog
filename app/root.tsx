@@ -13,6 +13,7 @@ import { authenticator } from "./utils/auth.server";
 import ButtonAppBar from "./components/ButtonAppBar";
 
 import styles from "./styles/app.css";
+import globalStyles from "./styles/globals.css";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -21,7 +22,10 @@ export const meta: MetaFunction = () => ({
 });
 
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: styles }];
+  return [
+    { rel: "stylesheet", href: styles },
+    { rel: "stylesheet", href: globalStyles },
+  ];
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
@@ -38,7 +42,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="lg:mx-auto lg:max-w-[65vw]">
         <ButtonAppBar user={user} />
         <Outlet context={user} />
         <ScrollRestoration />
