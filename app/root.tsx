@@ -42,7 +42,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="lg:mx-auto lg:max-w-[65vw]">
+      <body className="mx-auto lg:max-w-[65vw]">
         <ButtonAppBar user={user} />
         <Outlet context={user} />
         <ScrollRestoration />
