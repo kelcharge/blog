@@ -9,8 +9,8 @@ const PostBody = ({ post, date }: { post: Post; date: string }) => {
     "absolute top-1 font-bold px-2 bg-red-600 text-center hover:bg-red-400 hover:cursor-pointer";
 
   return (
-    <div>
-      <div className="pt-2 flex flex-col items-center text-black relative">
+    <div className="w-full px-4 lg:px-0">
+      <div className="pt-2 flex flex-col items-center text-gray-800 relative">
         {user && (
           <>
             <form method="post">
@@ -25,13 +25,13 @@ const PostBody = ({ post, date }: { post: Post; date: string }) => {
             </form>
           </>
         )}
-        <h2 className="text-2xl">{post.title}</h2>
-        <span className="text-sm">
+        <h2 className="text-2xl lg:text-4xl">{post.title}</h2>
+        <span className="text-sm lg:text-lg font-thin">
           By {post.author} | {date}
         </span>
 
         <div
-          className="pt-4 px-4 pb-8 lg:w-5/6 text-center lg:text-left"
+          className="pt-4 pb-8 lg:w-5/6 text-center lg:text-left lg:text-xl font-thin"
           dangerouslySetInnerHTML={{ __html: markdown }}
         />
       </div>
