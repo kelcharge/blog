@@ -10,8 +10,8 @@ const PostMenu = ({ data }: any) => {
   const user = useUser();
 
   return (
-    <div className="flex flex-col  lg:text-base">
-      <div className="px-6 pt-2 mb-8 lg:mb-0 flex flex-col items-center lg:text-left mt-[5.2rem]">
+    <div className="flex flex-col lg:text-base max-h-12 lg:max-h-0">
+      <div className="px-6 pt-2 lg:mb-0 flex flex-col items-center lg:text-left lg:mt-[5.2rem]">
         <ul className="text-left flex lg:flex-col gap-8 w-[100vw] ml-[5rem] overflow-x-scroll lg:w-full lg:ml-0 lg:overflow-x-auto">
           {data.posts.map((post: BlogPost) => (
             <li

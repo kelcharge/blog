@@ -4,9 +4,8 @@ import { Divider } from "@mui/material";
 const Container = ({ children, bgColor, textColor }: any) => {
   return (
     <main
-      className={`h-screen text-${textColor} bg-${bgColor} flex flex-col items-center lg:max-w-[65vw] gap-8`}
+      className={`h-screen text-${textColor} bg-${bgColor} flex flex-col items-center lg:max-w-[65vw]`}
     >
-      <Divider component="div" role="presentation" />
       <div className="flex lg:flex-row flex-col justify-center w-full">
         {children}
       </div>

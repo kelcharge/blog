@@ -578,6 +578,14 @@ video {
   height: 2rem;
 }
 
+.max-h-8 {
+  max-height: 2rem;
+}
+
+.max-h-12 {
+  max-height: 3rem;
+}
+
 .w-full {
   width: 100%;
 }
@@ -774,16 +782,24 @@ li > a {
     margin-left: 0px;
   }
 
+  .lg\:mt-\[5\.2rem\] {
+    margin-top: 5.2rem;
+  }
+
+  .lg\:max-h-0 {
+    max-height: 0px;
+  }
+
   .lg\:w-5\/6 {
     width: 83.333333%;
   }
 
-  .lg\:w-auto {
-    width: auto;
-  }
-
   .lg\:w-full {
     width: 100%;
+  }
+
+  .lg\:w-auto {
+    width: auto;
   }
 
   .lg\:max-w-\[65vw\] {

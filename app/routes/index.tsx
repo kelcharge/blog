@@ -4,6 +4,7 @@ import { useLoaderData } from "@remix-run/react";
 import PostBody from "~/components/PostBody";
 import Container from "~/components/Container";
 import PostMenu from "~/components/PostMenu";
+import { Divider } from "@mui/material";
 import { getPostDateTime } from "~/services/TimeService";
 
 export const loader = async () => {
@@ -28,6 +29,7 @@ export default function Index() {
   return (
     <Container>
       <PostMenu data={data} />
+      <Divider component="div" role="presentation" />
       {data.latestPost && <PostBody post={data.latestPost} date={data.date} />}
     </Container>
   );
