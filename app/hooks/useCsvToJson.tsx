@@ -1,11 +1,19 @@
 import { useState, useEffect } from "react";
 
+type CsvToJson = {
+  status: "success" | "loading" | "error";
+  json: Array<Record<string, any>>;
+};
+
 /**
  * Parses a CSV/XLSX file into a JSON object
  * @param file File object from HTML5 File API
  * @returns A JSON object representing the CSV/XLSX file
  */
-const useCsvToJson = (file: File) => {
+const useCsvToJson = (file: File | null): CsvToJson => {
+  const [status, setStatus] = useState<"success" | "loading" | "error">(
+    "loading"
+  );
   const [json, setJson] = useState<Array<Record<string, any>>>([]);
 
   useEffect(() => {
@@ -37,6 +45,7 @@ const useCsvToJson = (file: File) => {
             results.push(returnJson);
           }
 
+          setStatus("success");
           setJson(results);
         }
       };
@@ -45,10 +54,10 @@ const useCsvToJson = (file: File) => {
       }
     };
 
-    csvToJson(file);
+    csvToJson(file!);
   }, [file]);
 
-  return json;
+  return { status, json };
 };
 
 export default useCsvToJson;
