@@ -13,3 +13,21 @@ body {
 h1, h2, h3, h4, h5, h6, span, div {
     font-weight: 100;
 }
+
+code {
+    background-color: black;
+    color: cornsilk;
+    border-radius: 0.3rem;
+    padding: 4px 5px 5px;
+    white-space: nowrap;
+}
+
+pre code {
+  white-space: inherit;
+}
+
+pre {
+  background-color: black;
+  padding: 5px;
+  border-radius: 0.3em;
+}
