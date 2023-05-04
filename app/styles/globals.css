@@ -20,6 +20,16 @@ code {
     border-radius: 0.3rem;
     padding: 4px 5px 5px;
     white-space: nowrap;
+    width: inherit;
+    display: block;
+    font-size: x-small;
+    text-align: left;
+}
+
+@media screen and (min-width: 768px) {
+    code {
+        font-size: inherit;
+    }
 }
 
 pre code {

@@ -31,7 +31,7 @@ const PostBody = ({ post, date }: { post: Post; date: string }) => {
         </span>
 
         <div
-          className="pt-4 pb-8 lg:w-5/6 text-center lg:text-left lg:text-xl font-thin"
+          className="pt-4 pb-8 mx-auto flex flex-col w-[90vw] lg:w-5/6 text-center lg:text-left lg:text-xl font-thin"
           dangerouslySetInnerHTML={{ __html: markdown }}
         />
       </div>
